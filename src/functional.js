@@ -1,11 +1,19 @@
-function _filter(collection, predicate) {
-    var result = [];
-    
+function _each(collection, iterator) {
     for(var i = 0; i < collection.length; i++) {
-        if(predicate(collection[i])) {
-            result.push(collection[i]);
-        }
+        iterator(collection[i]);
     }
+
+    return collection;
+}
+
+function _filter(collection, predicate) {
+    var result = []; 
+
+    _each(collection, val => {
+        if(predicate(val)) {
+            result.push(val);
+        }
+    })
 
     return result;
 }
@@ -13,9 +21,7 @@ function _filter(collection, predicate) {
 function _map(collection, mapper) {
     var result = [];
 
-    for(var i = 0; i < collection.length; i++) {
-        result.push(mapper(collection[i]));
-    }
+    _each(collection, val => new_list.push(mapper(val)));
 
     return result;
 }
@@ -24,6 +30,7 @@ function _map(collection, mapper) {
 
 
 {
+
     const users = [
         { id: 1, name: 'ID', age: 36 },
         { id: 2, name: 'SH', age: 26 },
@@ -37,4 +44,3 @@ function _map(collection, mapper) {
 
     console.log(_filter(users, user => user.age > 30));
     console.log(_map(users, user => user.name + user.name));
-}
