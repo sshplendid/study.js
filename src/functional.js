@@ -1,4 +1,3 @@
-
 function _filter(collection, predicate) {
     var result = [];
     
@@ -6,6 +5,16 @@ function _filter(collection, predicate) {
         if(predicate(collection[i])) {
             result.push(collection[i]);
         }
+    }
+
+    return result;
+}
+
+function _map(collection, mapper) {
+    var result = [];
+
+    for(var i = 0; i < collection.length; i++) {
+        result.push(mapper(collection[i]));
     }
 
     return result;
@@ -27,4 +36,5 @@ function _filter(collection, predicate) {
     ];
 
     console.log(_filter(users, user => user.age > 30));
+    console.log(_map(users, user => user.name + user.name));
 }
